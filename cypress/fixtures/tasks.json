@@ -1,0 +1,45 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "完成项目文档",
+      "description": "编写项目使用文档和API文档",
+      "status": "pending",
+      "priority": "high",
+      "categoryId": 1,
+      "dueDate": "2025-01-31",
+      "createdAt": "2025-01-15T10:00:00Z",
+      "updatedAt": "2025-01-15T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "代码审查",
+      "description": "审查团队成员的代码提交",
+      "status": "in_progress",
+      "priority": "medium",
+      "categoryId": 1,
+      "dueDate": "2025-01-20",
+      "createdAt": "2025-01-14T10:00:00Z",
+      "updatedAt": "2025-01-16T10:00:00Z"
+    },
+    {
+      "id": 3,
+      "title": "学习新技术",
+      "description": "学习 Vue 3 和 TypeScript",
+      "status": "completed",
+      "priority": "low",
+      "categoryId": 2,
+      "dueDate": "2025-01-25",
+      "createdAt": "2025-01-10T10:00:00Z",
+      "updatedAt": "2025-01-18T10:00:00Z"
+    }
+  ],
+  "newTask": {
+    "title": "新任务",
+    "description": "这是一个新创建的任务",
+    "status": "pending",
+    "priority": "medium",
+    "categoryId": 1,
+    "dueDate": "2025-02-01"
+  }
+}

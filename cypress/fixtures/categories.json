@@ -1,0 +1,33 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "工作",
+      "color": "#409EFF",
+      "icon": "work",
+      "createdAt": "2025-01-01T10:00:00Z",
+      "updatedAt": "2025-01-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "生活",
+      "color": "#67C23A",
+      "icon": "life",
+      "createdAt": "2025-01-01T10:00:00Z",
+      "updatedAt": "2025-01-01T10:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "学习",
+      "color": "#E6A23C",
+      "icon": "study",
+      "createdAt": "2025-01-01T10:00:00Z",
+      "updatedAt": "2025-01-01T10:00:00Z"
+    }
+  ],
+  "newCategory": {
+    "name": "新分类",
+    "color": "#F56C6C",
+    "icon": "new-icon"
+  }
+}
