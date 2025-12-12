@@ -41,6 +41,11 @@ const router = createRouter({
       name: 'categoryList',
       component: () => import('../views/category/index.vue'),
     },
+    {
+      path: '/tools',
+      name: 'tools',
+      component: () => import('../views/tools/index.vue'),
+    },
   ],
 })
 // 路由拦截

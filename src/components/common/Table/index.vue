@@ -3,6 +3,7 @@
     :data="data"
     :loading="loading"
     v-bind="$attrs"
+    border
     @selection-change="handleSelectionChange"
   >
     <slot />

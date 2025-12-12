@@ -8,7 +8,7 @@ const route = useRoute()
 const getActiveIndex = (path: string) => {
   if (path === '/') return '0'
   if (path.startsWith('/task')) return '1'
-  if (path.startsWith('/login')) return '2'
+  if (path.startsWith('/category')) return '2'
   return '0'
 }
 
@@ -35,6 +35,9 @@ watch(
         </el-menu-item>
         <el-menu-item index="2">
           <RouterLink class="custom-router-link" to="/category">分类列表</RouterLink>
+        </el-menu-item>
+        <el-menu-item index="3">
+          <RouterLink class="custom-router-link" to="/tools">工具列表</RouterLink>
         </el-menu-item>
       </el-menu>
     </div>
