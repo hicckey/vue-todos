@@ -31,7 +31,7 @@ export const useCategoryStore = defineStore('category', () => {
         ...categories.value[index],
         ...category,
         updatedAt: new Date().toISOString(),
-      }
+      } as Category
       saveToStorage()
     }
   }

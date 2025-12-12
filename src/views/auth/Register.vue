@@ -85,7 +85,7 @@ const handleRegister = async () => {
     const res = await register(registerData as RegisterParams)
     if (res) {
       authStore.setAuthToken(res.token)
-      authStore.setUser(res.user as User)
+      authStore.setUser(res.user)
       ElMessage.success('注册成功')
       router.push('/')
     }

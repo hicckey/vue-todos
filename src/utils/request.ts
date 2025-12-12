@@ -1,5 +1,9 @@
 // 请求封装
-import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import axios, {
+  type AxiosInstance,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig,
+} from 'axios'
 import { ElMessage } from 'element-plus'
 import { getToken, removeToken } from './storage'
 import type { ApiResponse } from '@/types/api'
@@ -12,7 +16,7 @@ const service: AxiosInstance = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig<any>) => {
     const token = getToken()
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`

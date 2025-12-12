@@ -31,7 +31,7 @@ export const useTaskStore = defineStore('task', () => {
         ...tasks.value[index],
         ...task,
         updatedAt: new Date().toISOString(),
-      }
+      } as Task
       saveToStorage()
     }
   }
