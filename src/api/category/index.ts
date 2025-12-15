@@ -1,14 +1,20 @@
 // 分类相关API
-import type { Category, CategoryCreateParams, CategoryUpdateParams } from '@/types/category'
+import type {
+  Category,
+  CategoryCreateParams,
+  CategoryUpdateParams,
+  CategoryListParams,
+} from '@/types/category'
 import { getCategories } from '@/utils/storage'
 import { useCategoryStore } from '@/stores/category.store'
 
 /**
  * 获取分类列表
  */
-export const getCategoryList = async (): Promise<Category[]> => {
+export const getCategoryList = async (params?: CategoryListParams): Promise<Category[]> => {
   const categoryStore = useCategoryStore()
   let categories = categoryStore.categories
+  // 过滤先不处理
 
   // 如果没有数据，从 localStorage 加载
   if (categories.length === 0) {

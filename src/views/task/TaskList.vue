@@ -4,7 +4,7 @@
       <h1>任务列表</h1>
       <el-button type="primary" @click="handleCreate">创建任务</el-button>
     </div>
-    <el-table :data="tableData" :loading="loading" style="width: 100%">
+    <el-table class="table-container" :data="tableData" :loading="loading" style="width: 100%">
       <el-table-column prop="title" label="标题" />
       <el-table-column prop="status" label="状态" />
       <el-table-column prop="priority" label="优先级" />
@@ -17,12 +17,10 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      v-model:current-page="pagination.currentPage"
-      v-model:page-size="pagination.pageSize"
+    <Pagination
       :total="total"
-      :page-sizes="[10, 20, 50, 100]"
-      layout="total, sizes, prev, pager, next, jumper"
+      :page-size="pagination.pageSize"
+      :current-page="pagination.currentPage"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
@@ -36,7 +34,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { getTaskList, deleteTask } from '@/api/task'
 import { useTable } from '@/composables/useTable'
 import type { Task } from '@/types/task'
-
+import Pagination from '@/components/common/Pagination/index.vue'
 const router = useRouter()
 
 const getTaskListWithPagination = async (params: any) => {
@@ -91,17 +89,19 @@ const handleDelete = async (row: Task) => {
 
 <style scoped lang="less">
 .task-list-container {
-  padding: 20px;
-
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-
     h1 {
       margin: 0;
     }
+  }
+  .pagination-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
   }
 }
 </style>

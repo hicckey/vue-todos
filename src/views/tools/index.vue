@@ -4,7 +4,7 @@
       <h1>工具列表</h1>
       <el-button type="primary" @click="handleCreate">创建工具</el-button>
     </div>
-    <TableComp :data="tools" :loading="loading">
+    <TableComp :data="tableData" :loading="loading">
       <el-table-column prop="name" label="名称" />
       <el-table-column prop="description" label="描述" />
       <el-table-column label="操作" width="200">
@@ -14,6 +14,13 @@
         </template>
       </el-table-column>
     </TableComp>
+    <Pagination
+      :total="total"
+      :page-size="pagination.pageSize"
+      :current-page="pagination.currentPage"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
   </div>
   <!-- 创建编辑框 -->
 </template>
@@ -28,30 +35,32 @@ import {
   deleteTools,
   updateTool,
 } from '@/api/tools/index'
-
-const tools = ref<Tool[]>([])
-const loading = ref(false)
-onMounted(async () => {
-  loading.value = true
-  const data = await getToolsListFn()
-  console.log(data, '==========')
-  tools.value = data
-  loading.value = false
+import Pagination from '@/components/common/Pagination/index.vue'
+import { useTable } from '@/composables/useTable'
+const { loadData, handleSizeChange, handleCurrentChange, tableData, total, pagination, loading } =
+  useTable(async (params: any) => {
+    const data = await getToolsListFn(params)
+    return {
+      list: data,
+      total: data.length,
+    }
+  })
+onMounted(() => {
+  loadData()
 })
+const handleCreate = () => {
+  console.log('创建工具')
+}
 const handleEdit = (row: Tool) => {
   console.log(row, '==========')
 }
 const handleDelete = (row: Tool) => {
   console.log(row, '==========')
 }
-const handleCreate = () => {
-  console.log('创建工具')
-}
 </script>
 <style scoped lang="less">
 .tools-container {
   width: 100%;
-  padding: 20px;
   .header {
     display: flex;
     justify-content: space-between;

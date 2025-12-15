@@ -4,7 +4,7 @@
       <h1>分类管理</h1>
       <el-button type="primary" @click="handleCreate">创建分类</el-button>
     </div>
-    <el-table :data="categoryList" style="width: 100%">
+    <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="name" label="名称" />
       <el-table-column prop="color" label="颜色">
         <template #default="{ row }">
@@ -19,6 +19,13 @@
         </template>
       </el-table-column>
     </el-table>
+    <Pagination
+      :total="total"
+      :page-size="pagination.pageSize"
+      :current-page="pagination.currentPage"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
   </div>
   <!-- 创建分类弹窗 -->
   <Modal
@@ -50,16 +57,26 @@ import { getCategoryList, deleteCategory, createCategory } from '@/api/category'
 import type { Category, CategoryCreateParams } from '@/types/category'
 import type { FormInstance, FormRules } from 'element-plus'
 import Modal from '@/components/common/Modal/index.vue'
-
+import Pagination from '@/components/common/Pagination/index.vue'
+import { useTable } from '@/composables/useTable'
 const categoryList = ref<Category[]>([])
 const categoryId = ref<number | null>(null)
-
 onMounted(async () => {
-  const data = await getCategoryList()
-  if (data) {
-    categoryList.value = data
-  }
+  loadData()
 })
+const { loadData, handleSizeChange, handleCurrentChange, tableData, total, pagination } = useTable(
+  async (params: any) => {
+    const allCategories = await getCategoryList()
+    const page = params.page || 1
+    const pageSize = params.pageSize || 10
+    const start = (page - 1) * pageSize
+    const end = start + pageSize
+    return {
+      list: allCategories.slice(start, end),
+      total: allCategories.length,
+    }
+  },
+)
 
 const handleDelete = async (row: Category) => {
   try {
@@ -70,10 +87,7 @@ const handleDelete = async (row: Category) => {
     })
     await deleteCategory(row.id)
     ElMessage.success('删除成功')
-    const data = await getCategoryList()
-    if (data) {
-      categoryList.value = data
-    }
+    loadData()
   } catch (error) {
     if (error !== 'cancel') {
       console.error('删除失败:', error)
@@ -102,10 +116,7 @@ function handleCreateCategory() {
       await createCategory(createCategoryForm)
       console.log('createCategory success')
       ElMessage.success('创建成功')
-      const data = await getCategoryList()
-      if (data) {
-        categoryList.value = data
-      }
+      loadData()
       handleCloseCreateCategory()
     }
   })
@@ -133,7 +144,7 @@ const handleEdit = (row: Category) => {
 
 <style scoped lang="less">
 .category-container {
-  padding: 20px;
+  height: 100%;
 
   .header {
     display: flex;

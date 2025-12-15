@@ -4,6 +4,7 @@
     v-model:page-size="pageSize"
     :total="total"
     :page-sizes="pageSizes"
+    class="pagination-container"
     layout="total, sizes, prev, pager, next, jumper"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
@@ -59,4 +60,10 @@ const handleCurrentChange = (page: number) => {
 }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+</style>

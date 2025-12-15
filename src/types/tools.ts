@@ -8,6 +8,12 @@ export interface createToolParams {
   description: string
 }
 
+export interface ToolListParams {
+  page?: number
+  pageSize?: number
+  keyword?: string
+}
+
 export interface updatedToolParams extends Partial<Tool> {
   id: number
 }

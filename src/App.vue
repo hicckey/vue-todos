@@ -68,10 +68,7 @@ watch(
   }
   .main-content {
     flex: 1;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 20px 20px 0;
     background-color: #fff;
   }
   .footer-bar {

@@ -1,12 +1,12 @@
 import { useToolsStore } from '@/stores/tools.store'
-import type { Tool, updatedToolParams } from '@/types/tools'
+import type { Tool, updatedToolParams, ToolListParams } from '@/types/tools'
 import { getToolsList } from '@/utils/storage'
 
 /**
  * 获取工具列表
  */
 
-export const getToolsListFn = (): Promise<Tool[]> => {
+export const getToolsListFn = (params?: ToolListParams): Promise<Tool[]> => {
   const store = useToolsStore()
   let list = store.toolsList
   if (!list.length) {
